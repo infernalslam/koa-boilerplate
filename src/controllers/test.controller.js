@@ -4,6 +4,11 @@ const testController = {
       status: ctx.response.message.status,
       message: ctx.response
     }
+  },
+  async insertAccount (ctx) {
+    ctx.body = {
+      status: 'ok'
+    }
   }
 }
 

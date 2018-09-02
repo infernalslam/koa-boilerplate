@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^6.0.0",
+    "joi": "^13.6.0",
     "kcors": "^2.2.2",
     "koa": "^2.5.2",
     "koa-body": "^4.0.4",

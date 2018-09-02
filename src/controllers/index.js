@@ -1,6 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 const KoaRouter = require('koa-router')
+// import vaildator
+const requireModels = require('../midddleware/required')
 
 const routeConfigs = fs.readdirSync(__dirname)
   .reduce((current, next) => {
@@ -27,7 +29,7 @@ for (let key in routeConfigs) {
   routes.forEach((route) => {
     let middlewares = []
     // logic check middleware
-    // if (route.bearerAuth) middlewares.push(authorizer.bearerAuth)
+    if (route.requireAccount) middlewares.push(requireModels.account)
     middlewares.push(controller[route.handler])
     routerObject[route.method.toLowerCase()](route.url, ...middlewares)
   })
