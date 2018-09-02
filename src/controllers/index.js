@@ -7,6 +7,7 @@ const routeConfigs = fs.readdirSync(__dirname)
     if (next.indexOf('.route') !== -1 && (next.indexOf('.') !== 0) && (next !== 'index.js')) {
       let config = require(path.join(__dirname, next)).default
       let configName = next.split('.')[0]
+
       current[configName] = config
     }
     return current
@@ -22,17 +23,15 @@ for (let key in routeConfigs) {
   if (!routeConfig) {
     continue
   }
+
   routes.forEach((route) => {
     let middlewares = []
+    // logic check middleware
+    // if (route.bearerAuth) middlewares.push(authorizer.bearerAuth)
     middlewares.push(controller[route.handler])
     routerObject[route.method.toLowerCase()](route.url, ...middlewares)
   })
-
-  routerObject['get']('/', function (ctx) {
-    ctx.body = {
-      message: 'ok',
-    }
-  })
+  
 }
 
 module.exports = routerObject
