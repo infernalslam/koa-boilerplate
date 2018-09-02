@@ -1,5 +1,5 @@
 const joi = require('joi')
-const accountSchema = require('../vaildator/account')
+const accountSchema = require('../validator/account')
 const { HttpError } = require('../utils/error')
 const required = {
   async account (ctx, next) {
