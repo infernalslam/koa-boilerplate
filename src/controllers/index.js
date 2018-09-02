@@ -1,7 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 const KoaRouter = require('koa-router')
-// import vaildator
 const requireModels = require('../midddleware/required')
 
 const routeConfigs = fs.readdirSync(__dirname)
