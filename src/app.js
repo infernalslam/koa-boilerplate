@@ -5,8 +5,12 @@ const koaBody = require('koa-body')
 const router = require('./controllers')
 const response = require('./midddleware/response')
 const bearerAuthentication = require('./midddleware/bearer')
+const mongoose = require('mongoose')
 const app = new Koa()
 const logger = require('./config/logger')
+
+mongoose.Promise = global.Promise
+mongoose.connect('mongodb://localhost:27017/local', { useNewUrlParser: true })
 
 app.use(cors())
 app.use(koaBody({ formLimit: '5mb', multipart: true }))

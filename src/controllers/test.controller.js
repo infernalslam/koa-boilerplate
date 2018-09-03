@@ -1,3 +1,4 @@
+const Account = require('../models/account.schema')
 const testController = {
   async healthCheckup (ctx) {
     ctx.body = {
@@ -6,10 +7,9 @@ const testController = {
     }
   },
   async insertAccount (ctx) {
-    ctx.body = {
-      status: 'ok'
-    }
-  }
+    let accountModel = new Account(ctx.request.body)
+    ctx.body = await accountModel.save()
+  },
 }
 
 module.exports = testController
