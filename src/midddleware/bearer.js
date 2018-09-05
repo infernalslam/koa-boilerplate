@@ -1,18 +1,20 @@
+const jwt = require('jsonwebtoken')
 const bearer = async (ctx, next) => {
   try {
-    if (ctx.request.headers.authorization) await next()
-    else {
-      ctx.status = 401
-      ctx.body = {
-        error_message: 'Unauthorized',
-        redirect: `https://http.cat/${ctx.status}`
+    if (ctx.request.headers.authorization) {
+      let authHeader = ctx.request.headers.authorization.split(' ')[1]
+      let decoded = jwt.decode(authHeader)
+      ctx.auth = {
+        storeId: decoded.store_id,
+        userId: decoded.user_id,
+        userToken: decoded.user_token
       }
+      await next()
     }
   } catch (error) {
-    ctx.status = error.code || 500
+    ctx.status = error.code || 401
     ctx.body = {
-      error_message: error.message || 'Server can\'t process your request.',
-      redirect: `https://http.cat/${ctx.status}`
+      error_message: 'Unauthorization'
     }
     ctx.app.emit('error', error, ctx)
   }
