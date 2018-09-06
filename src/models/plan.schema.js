@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const schema = new Schema({
-  accountId: {
+  planId: {
     type: String,
     unique: true
   },
-  name: String,
-  surname: String,
+  planName: String,
+  price: Number,
 })
-module.exports = mongoose.model('account', schema)
+module.exports = mongoose.model('plan', schema)

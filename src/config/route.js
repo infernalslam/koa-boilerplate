@@ -1,6 +1,5 @@
 const AccountRequestModel = require('../models/requests/account')
 const skeleton = require('../controllers/skeleton')
-
 module.exports = {
   skeleton: [
     {
@@ -14,6 +13,15 @@ module.exports = {
       path: '/',
       handler: new skeleton().post,
       requestModel: new AccountRequestModel().post()
+    },
+    {
+      method: 'GET',
+      path: '/fake',
+      handler: new skeleton().fake,
+      requestModel: new AccountRequestModel().fake(),
+      responseModel: {
+        pick: ['id','name','email']
+      }
     }
   ]
 }

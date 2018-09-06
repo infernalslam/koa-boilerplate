@@ -14,7 +14,14 @@ class AccountRequestModel {
   post () {
     return {
       name: joi.string().required(),
-      surname: joi.string().required()
+      surname: joi.string().required(),
+      planName: joi.string().required(),
+      price: joi.number().required()
+    }
+  }
+  fake () {
+    return {
+      title: joi.string().required()
     }
   }
 }
